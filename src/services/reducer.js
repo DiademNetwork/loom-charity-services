@@ -1,7 +1,8 @@
+const config = require("../config")
 const contract = require("../modules/contract")
 const getstream = require("../modules/getstream")
 
-contract.events.Create({}, async (err, event) => {
+contract.events.Create({ fromBlock: config.fromBlock }, async (err, event) => {
   if (err)
     return console.error(err)
 
@@ -18,7 +19,7 @@ contract.events.Create({}, async (err, event) => {
   })
 })
 
-contract.events.Confirm({}, async (err, event) => {
+contract.events.Confirm({ fromBlock: config.fromBlock }, async (err, event) => {
   if (err)
     return console.error(err)
 
@@ -33,7 +34,7 @@ contract.events.Confirm({}, async (err, event) => {
   })
 })
 
-contract.events.Support({}, async (err, event) => {
+contract.events.Support({ fromBlock: config.fromBlock }, async (err, event) => {
   if (err)
     return console.error(err)
 
