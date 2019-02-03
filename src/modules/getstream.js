@@ -2,7 +2,7 @@ const config = require("../config")
 
 const stream = require("getstream")
 
-const streamClient = stream.connect(config.streamKey, config.streamSecret, config.streamAppId)
+const client = stream.connect(config.streamKey, config.streamSecret, config.streamAppId)
 
 const achievement = ({ title, link, userAddress, actor }) => ({
   actor: actor,
@@ -64,7 +64,7 @@ const activity = (type) => (args) => {
   }
 }
 
-module.exports = (client) => ({
+module.exports = {
   async createHandler(args) {
     const { userAddress, title, link } = args
 
@@ -94,4 +94,4 @@ module.exports = (client) => ({
 
     await achievements.addActivity(activity('support')({ ...args, actor }))
   }
-})
+}

@@ -9,7 +9,7 @@ contract.events.Create({}, async (err, event) => {
 
   const { messageHash } = event.returnValues
 
-  const achievement = await contract.getAchievementByHash(messageHash).call()
+  const achievement = await contract.methods.getAchievementByHash(messageHash).call()
 
   await getstream.createHandler({
     userAddress: achievement.owner,
