@@ -4,6 +4,17 @@ const stream = require("getstream")
 
 const client = stream.connect(config.streamKey, config.streamSecret, config.streamAppId)
 
+const getActor = async (userAddress) => {
+  let actor = 'Anonymous'
+
+  try {
+    const actor = await client.user(userAddress).get()
+  } catch (err) {
+  }
+
+  return actor
+}
+
 const achievement = ({ title, link, userAddress, actor }) => ({
   actor: actor,
   object: link,
@@ -70,7 +81,7 @@ module.exports = {
 
     const achievements = client.feed('achievement', userAddress)
 
-    const actor = await client.user(userAddress).get()
+    const actor = await getActor(userAddress)
 
     await achievements.addActivity(activity('achievement')({ ...args, actor }))
   },
@@ -80,7 +91,7 @@ module.exports = {
 
     const achievements = client.feed('achievement', creatorAddress)
 
-    const actor = await client.user(userAddress).get()
+    const actor = await getActor(userAddress)
 
     await achievements.addActivity(activity('confirmation')({ ...args, actor }))
   },
@@ -90,7 +101,7 @@ module.exports = {
 
     const achievements = client.feed('achievement', creatorAddress)
 
-    const actor = await client.user(userAddress).get()
+    const actor = await getActor(userAddress)
 
     await achievements.addActivity(activity('support')({ ...args, actor }))
   }
