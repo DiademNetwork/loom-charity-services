@@ -5,12 +5,7 @@ const stream = require("getstream")
 const client = stream.connect(config.streamKey, config.streamSecret, config.streamAppId)
 
 const getActor = async (userAddress) => {
-  let actor = 'Anonymous'
-
-  try {
-    const actor = await client.user(userAddress).get()
-  } catch (err) {
-  }
+  const actor = await client.user(userAddress).getOrCreate({})
 
   return actor
 }
