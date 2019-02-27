@@ -101,3 +101,6 @@ module.exports = {
     await achievements.addActivity(activity('support')({ ...args, actor }))
   }
 }
+
+module.exports.client = client
+module.exports.feed = client.feed('achievement_aggregated', 'common')
